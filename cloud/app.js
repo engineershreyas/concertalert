@@ -186,9 +186,9 @@ function compareDates(metroId,singerId,lat,lng,fn){
           console.log(dateOfEvent);
         if(dateOfEvent <= dateBenchmark){
           fn(myUri,true);
-          console.log("There is an event with user's artits within two weeks");
+          console.log("There is an event with user's artists within two weeks");
         }else{
-          console.log("There is no event with user's artits within two weeks");
+          console.log("There is no event with user's artists within two weeks");
           fn(myUri,false);
         }
       }else{
