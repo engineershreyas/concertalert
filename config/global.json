@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "CONCERTALERT": {
+            "applicationId": "m70Qg9DQNPbJCi1xRwbFfm0XhNwdAW10i59aMSUl", 
+            "masterKey": "h2OeRXcZETiV6vJ7PNn1ZveS18K6ZY9ejQRnzBkp"
+        }, 
+        "_default": {
+            "link": "CONCERTALERT"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.3.1"
+    }
+}
