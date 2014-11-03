@@ -31,7 +31,7 @@ query.find({
       //console.log("mI is " + mI);
       getArtistId(artist,function(aI){
         id = aI;
-        console.log("Testing values in main function - id = " + id + " mId = " + mId);
+        console.log("Testing values in main function: id = " + id + " mId = " + mId);
         compareDates(mId,id,latitude,longitude,function(myLink,status){
           console.log("Is concert near? " + status);
           if(status === true){
@@ -39,6 +39,7 @@ query.find({
               sendYo(username,myLink);
           }else{
               //No concert is near to user
+              //TODO: send link that says "Sorry not concerts nearby"
           }
         });
 
@@ -149,7 +150,7 @@ function compareDates(metroId,singerId,lat,lng,fn){
     console.log("Here is response text: " + httpResponse.text);
     //console.log("Length of results" + httpResponse.data.resultsPage.results.length);
 
-      var events = httpResponse.data.resultsPage.results.event;
+  var events = httpResponse.data.resultsPage.results.event;
 
   if(events !== undefined && events.length > 0){
         console.log("Events found!");
@@ -186,9 +187,9 @@ function compareDates(metroId,singerId,lat,lng,fn){
           console.log(dateOfEvent);
         if(dateOfEvent <= dateBenchmark){
           fn(myUri,true);
-          console.log("There is an event with user's artits within two weeks");
+          console.log("There is an event with user's artist within two weeks");
         }else{
-          console.log("There is no event with user's artits within two weeks");
+          console.log("There is no event with user's artitst within two weeks");
           fn(myUri,false);
         }
       }else{
