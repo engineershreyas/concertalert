@@ -21,13 +21,18 @@ Parse.Cloud.job("checkConcerts",function(request,status){
               if(status === true){
                 sendYo(username,myLink);
               }
-              
+
         });
       });
 
 
 
 
+  }).then(function() {
+    status.success("Checked successfully!");
+
+  }, function(error){
+      status.error("Uh Oh..." + error.message);
   });
 
 
