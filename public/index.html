@@ -22,12 +22,26 @@
 
 
     function setUser() {
+
       Parse.initialize("m70Qg9DQNPbJCi1xRwbFfm0XhNwdAW10i59aMSUl", "257Cl7Pqd7hJirFB4E2AhncknHJycBWeVSrlAkr5");
       var user = new Parse.User();
       var usernameSubmitted = document.getElementById("username");
       user.set("username", usernameSubmitted);
       var artistSubmitted = document.getElementById("artist");
       user.set("artist", artistSubmitted);
+
+      user.signUp(null, {
+        success: function(user) {
+          alert("Success!");
+        },
+        error: function(user, error) {
+
+          alert("Error!");
+        }
+
+
+      });
+
     };
 
     </script>
