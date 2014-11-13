@@ -37,6 +37,7 @@
       user.signUp(null, {
         success: function(user) {
             //alert("Success!");
+            location.href='submitted.html';
         },
         error: function(user, error) {
     // Show the error message somewhere and let the user try again.
@@ -46,7 +47,7 @@
     }else{
       alert("Oops, make sure username and artist fields are filled out");
     }
-    location.href='submitted.html';
+
     }
 
     </script>

@@ -25,6 +25,9 @@ query.find({
     if(yoers.length > 0){
     var yoer = yoers[0];
     artist = yoer.get('artist');
+    var geopoint = new Parse.GeoPoint(latitude,longitude);
+    yoer.set("location",geopoint);
+    yoer.saveEventually();
 
     findMetroId(latitude,longitude,function(mI){
       mId = mI;
