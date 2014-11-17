@@ -13,8 +13,14 @@ app.get('/receiveInfo', function(request,response){
 
 var username = request.query.username;
 var result = (request.query.location).split(";");
-var latitude = new Number(result[0]);
-var longitude = new Number(result[1]);
+//var latitude,longitude;
+if(result !== undefined){
+ latitude = new Number(result[0]);
+ longitude = new Number(result[1]);}
+else{
+ //latitude = 40.5477;
+ //longitude = -74.4633;
+}
 
 
 
@@ -23,11 +29,20 @@ query.equalTo("username",username);
 query.find({
   success: function(yoers){
     if(yoers.length > 0){
+      console.log("user found");
     var yoer = yoers[0];
     artist = yoer.get('artist');
     var geopoint = new Parse.GeoPoint(latitude,longitude);
     yoer.set("location",geopoint);
-    yoer.saveEventually();
+    yoer.save(null,{
+      success: function(yoer) {
+        console.log("user saved!");
+      },
+      error : function(yoer,error) {
+        console.log("user couldnt be saved");
+      }
+
+    });
 
     findMetroId(latitude,longitude,function(mI){
       mId = mI;
@@ -37,12 +52,13 @@ query.find({
         console.log("Testing values in main function: id = " + id + " mId = " + mId);
         compareDates(mId,id,latitude,longitude,function(myLink,status){
           console.log("Is concert near? " + status);
+          console.log("User to be Yo'd is " + username);
           if(status === true){
               console.log("Link is " + myLink);
               sendYo(username,myLink);
           }else{
               //No concert is near to user
-              //TODO: send link that says "Sorry not concerts nearby"
+              sendYo(username,'http://concertalert.parseapp.com/no.html');
           }
         });
 
@@ -53,6 +69,12 @@ query.find({
   //  console.log("Testing values in main function - id = " + id + " mId = " + giveMetroId());
 
   }
+  else{
+    console.log("user not found");
+  }
+},
+  error: function(error){
+    console.log("There is an error");
   }
 });
 
@@ -235,7 +257,7 @@ function sendYo(user,aLink){
     },
     headers: {
       'Content-type': 'application/x-www-form-urlencoded',
-      'Content-length': params.length,
+      'Content-length': 124,
       'Connection': 'close'
     },
     success: function(httpResponse){
